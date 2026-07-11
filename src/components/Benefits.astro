@@ -1,0 +1,87 @@
+---
+// Benefits.astro — franja de beneficios clave, formato compacto tipo "ticker".
+const benefits = [
+  { icon: 'clock', title: 'Atención rápida', text: 'Coordinamos visita en el día para urgencias.' },
+  { icon: 'file', title: 'Presupuesto sin cargo', text: 'Diagnóstico y cotización antes de cualquier trabajo.' },
+  { icon: 'badge', title: 'Personal capacitado', text: 'Oficiales con experiencia real en obra.' },
+  { icon: 'shield', title: 'Trabajos garantizados', text: 'Respaldamos cada reparación por escrito.' },
+  { icon: 'drop', title: 'Materiales de calidad', text: 'Insumos de marca, no genéricos de bajo costo.' },
+  { icon: 'map', title: 'CABA y GBA', text: 'Cobertura en capital y en zona sur, oeste y norte.' },
+];
+
+const icons = {
+  clock: 'M12 8v4l3 2 M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z',
+  file: 'M14 3v5h5 M6 3h8l5 5v13H6z M9 13h6 M9 17h6',
+  badge: 'M12 3l2.4 2.4H18v3.6L20.4 12 18 14.4V18h-3.6L12 20.4 9.6 18H6v-3.6L3.6 12 6 9.6V6h3.6z M9.5 12l1.7 1.7L14.5 10',
+  shield: 'M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z M9 12l2 2 4-4',
+  drop: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z',
+  map: 'M9 3 3 5v16l6-2 6 2 6-2V3l-6 2-6-2Z M9 3v16 M15 5v16',
+};
+---
+
+<section class="benefits">
+  <div class="container">
+    <ul class="benefits__grid reveal-stagger reveal">
+      {benefits.map((b, i) => (
+        <li class="benefits__item" style={`--stagger-index: ${i}`}>
+          <span class="benefits__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d={icons[b.icon]}/>
+            </svg>
+          </span>
+          <div>
+            <h3>{b.title}</h3>
+            <p>{b.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .benefits {
+    padding-block: clamp(2.5rem, 5vw, 3.5rem);
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
+  .benefits__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem 2.2rem;
+  }
+  .benefits__item {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+  }
+  .benefits__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--blue-100);
+    color: var(--blue-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .benefits__icon svg { width: 22px; height: 22px; }
+  .benefits__item h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .benefits__item p {
+    font-size: 0.86rem;
+    color: var(--ink-500);
+    margin: 0;
+  }
+
+  @media (max-width: 880px) {
+    .benefits__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .benefits__grid { grid-template-columns: 1fr; gap: 1.4rem; }
+  }
+</style>

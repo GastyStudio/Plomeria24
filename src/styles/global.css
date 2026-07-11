@@ -1,0 +1,248 @@
+/* ==========================================================================
+   FERNANDO PLOMERÍA — Design Tokens & Base Styles
+   Paleta derivada del isologo: azul noche + azul cielo + acento cobre
+   (el cobre remite al material de las cañerías, no es un color decorativo)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+  /* Color: base azul del logo */
+  --navy-950: #081b2e;
+  --navy-900: #0b2740;
+  --navy-800: #0e3a5c;
+  --navy-700: #12507c;
+  --blue-600: #1a7fb8;
+  --blue-500: #2c98d1;
+  --blue-100: #dcefff;
+  --sky-50: #f5fafe;
+
+  /* Color: acento cobre — el material de las cañerías reales */
+  --copper-600: #a8632e;
+  --copper-500: #c1793d;
+  --copper-400: #d69259;
+  --copper-100: #f5e3d1;
+
+  /* Neutrales */
+  --ink-900: #0f2130;
+  --ink-700: #3c4f5f;
+  --ink-500: #6b7d8c;
+  --white: #ffffff;
+  --line: #dce7ee;
+
+  /* Tipografía */
+  --font-display: 'Archivo', 'Helvetica Neue', sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Escala fluida */
+  --fs-hero: clamp(2.4rem, 5.4vw, 4.4rem);
+  --fs-h2: clamp(1.9rem, 3.4vw, 2.75rem);
+  --fs-h3: clamp(1.2rem, 1.6vw, 1.5rem);
+  --fs-lead: clamp(1.05rem, 1.4vw, 1.25rem);
+  --fs-body: 1.05rem;
+  --fs-small: 0.9rem;
+  --fs-eyebrow: 0.8rem;
+
+  /* Layout */
+  --container: 1180px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 26px;
+  --section-pad: clamp(4rem, 8vw, 7rem);
+
+  /* Sombras */
+  --shadow-sm: 0 2px 10px rgba(11, 39, 64, 0.06);
+  --shadow-md: 0 12px 32px rgba(11, 39, 64, 0.12);
+  --shadow-lg: 0 24px 60px rgba(11, 39, 64, 0.18);
+
+  /* Transiciones */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--ink-900);
+  background: var(--sky-50);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--navy-950);
+  margin: 0;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.section {
+  padding-block: var(--section-pad);
+}
+
+.section--tight { padding-block: clamp(2.5rem, 5vw, 4rem); }
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+.section-head.center { margin-inline: auto; text-align: center; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper-600);
+  margin-bottom: 0.9rem;
+}
+.eyebrow::before {
+  content: '';
+  width: 18px;
+  height: 2px;
+  background: var(--copper-500);
+  border-radius: 2px;
+}
+
+.section-head h2 { font-size: var(--fs-h2); }
+.section-head p {
+  font-size: var(--fs-lead);
+  color: var(--ink-700);
+  margin-top: 0.9rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.95rem 1.7rem;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
+  white-space: nowrap;
+}
+.btn:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 3px;
+}
+.btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--copper-500), var(--copper-600));
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+.btn--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(168, 99, 46, 0.32);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--white);
+}
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-3px);
+}
+
+.btn--ghost-dark {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--navy-900);
+}
+.btn--ghost-dark:hover {
+  border-color: var(--blue-600);
+  color: var(--blue-600);
+  transform: translateY(-3px);
+}
+
+.btn--block { width: 100%; }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-stagger.is-visible > * {
+  transition-delay: calc(var(--stagger-index, 0) * 90ms);
+}
+
+/* ---------- Misc ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -60px;
+  background: var(--navy-950);
+  color: var(--white);
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius-sm);
+  z-index: 200;
+  transition: top 0.25s var(--ease);
+}
+.skip-link:focus { top: 1rem; }

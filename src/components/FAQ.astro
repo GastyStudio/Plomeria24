@@ -1,0 +1,91 @@
+---
+// FAQ.astro — preguntas frecuentes con <details>/<summary> nativos:
+// accesibles y funcionales incluso sin JavaScript (progressive enhancement).
+const faqs = [
+  { q: '¿El presupuesto tiene algún costo?', a: 'No. Diagnosticamos el problema y te pasamos el presupuesto sin cargo antes de realizar cualquier trabajo.' },
+  { q: '¿Trabajan los fines de semana?', a: 'Sí, coordinamos visitas los fines de semana para urgencias. Escribinos por WhatsApp y te confirmamos disponibilidad.' },
+  { q: '¿En qué zonas trabajan exactamente?', a: 'Cubrimos toda Capital Federal y Gran Buenos Aires (zona norte, sur y oeste). Si estás fuera de esa zona, contactanos igual para confirmar.' },
+  { q: '¿Los trabajos tienen garantía?', a: 'Sí, todos nuestros trabajos incluyen garantía. Si surge algún inconveniente relacionado con la tarea realizada, volvemos sin cargo adicional.' },
+  { q: '¿Puedo pedir el servicio solo para una revisión, sin reparación?', a: 'Sí, podés solicitar únicamente un diagnóstico. Vos decidís si avanzar con la reparación después de recibir el presupuesto.' },
+  { q: '¿Qué formas de pago aceptan?', a: 'Efectivo y transferencia. Podés consultar por otras formas de pago directamente por WhatsApp según el monto del trabajo.' },
+];
+---
+
+<section class="faq" id="faq">
+  <div class="container faq__inner">
+    <div class="section-head reveal">
+      <p class="eyebrow">Dudas frecuentes</p>
+      <h2>Preguntas frecuentes</h2>
+      <p>Si tu consulta no está acá, escribinos directamente por WhatsApp.</p>
+    </div>
+
+    <div class="faq__list reveal">
+      {faqs.map((f) => (
+        <details class="faq__item">
+          <summary>
+            <span>{f.q}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="faq__answer"><p>{f.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq { background: var(--sky-50); }
+  .faq__inner {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .faq__item {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 0.3rem 1.3rem;
+    transition: border-color 0.3s var(--ease);
+  }
+  .faq__item[open] { border-color: var(--blue-600); }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    font-weight: 700;
+    color: var(--navy-950);
+    font-size: 0.98rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary svg {
+    width: 20px; height: 20px;
+    flex-shrink: 0;
+    color: var(--blue-600);
+    transition: transform 0.3s var(--ease);
+  }
+  .faq__item[open] summary svg { transform: rotate(180deg); }
+
+  .faq__answer {
+    padding-bottom: 1.2rem;
+    color: var(--ink-700);
+    font-size: 0.92rem;
+    max-width: 60ch;
+  }
+  .faq__answer p { margin: 0; }
+
+  @media (max-width: 880px) {
+    .faq__inner { grid-template-columns: 1fr; }
+  }
+</style>

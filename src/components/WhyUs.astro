@@ -1,0 +1,74 @@
+---
+// WhyUs.astro — banda oscura con estadísticas, estilo "panel de control".
+const stats = [
+  { value: '10+', label: 'Años de experiencia' },
+  { value: '2.000+', label: 'Trabajos realizados' },
+  { value: '24/7', label: 'Atención para urgencias' },
+  { value: '98%', label: 'Clientes satisfechos' },
+];
+---
+
+<section class="whyus" id="por-que-elegirnos">
+  <div class="whyus__grid" aria-hidden="true"></div>
+  <div class="container whyus__inner">
+    <div class="section-head reveal">
+      <p class="eyebrow eyebrow--light">Por qué elegirnos</p>
+      <h2 class="whyus__title">Números que se sostienen con trabajo, no con promesas</h2>
+    </div>
+
+    <dl class="whyus__stats reveal-stagger reveal">
+      {stats.map((s, i) => (
+        <div class="whyus__stat" style={`--stagger-index: ${i}`}>
+          <dt>{s.value}</dt>
+          <dd>{s.label}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .whyus {
+    position: relative;
+    background: var(--navy-950);
+    color: var(--white);
+    overflow: hidden;
+  }
+  .whyus__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+  .whyus__inner { position: relative; z-index: 1; }
+  .whyus__title { color: var(--white); }
+  .whyus .section-head p:not(.eyebrow) { color: #cfe0ee; }
+
+  .whyus__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin: 0;
+  }
+  .whyus__stat {
+    border-left: 2px solid var(--copper-500);
+    padding: 0.3rem 0 0.3rem 1.1rem;
+  }
+  .whyus__stat dt {
+    font-family: var(--font-mono);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    color: var(--white);
+  }
+  .whyus__stat dd {
+    margin: 0.3rem 0 0 0;
+    font-size: 0.88rem;
+    color: #a9c2d6;
+  }
+
+  @media (max-width: 880px) {
+    .whyus__stats { grid-template-columns: repeat(2, 1fr); row-gap: 2rem; }
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+// Services.astro — grilla de tarjetas de servicios con iconos propios.
+const services = [
+  { title: 'Destapaciones', text: 'Cañerías, desagües y pluviales, con máquina destapadora cuando el trabajo lo requiere.', icon: 'M4 12h16 M4 12a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4 M4 12v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4' },
+  { title: 'Reparación de pérdidas', text: 'Detección y solución de pérdidas de agua visibles y ocultas, en pared o piso.', icon: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z' },
+  { title: 'Instalaciones de agua', text: 'Redes de agua fría y caliente para reformas, ampliaciones y obra nueva.', icon: 'M6 4h12v6a6 6 0 0 1-12 0V4Z M9 20h6 M12 16v4' },
+  { title: 'Instalaciones de gas', text: 'Instalación y adecuación de gas domiciliario por personal habilitado.', icon: 'M12 2c2 3 5 5.5 5 9a5 5 0 0 1-10 0c0-1.6.8-3 1.6-4.2' },
+  { title: 'Reparación de calefones', text: 'Diagnóstico y arreglo de calefones a gas: piloto, tiro balanceado y más.', icon: 'M7 3h10v8a5 5 0 0 1-10 0V3Z M9 21h6 M12 16v5' },
+  { title: 'Termotanques', text: 'Instalación, mantenimiento y reparación de termotanques eléctricos y a gas.', icon: 'M8 2h8v14a4 4 0 0 1-8 0V2Z M8 8h8' },
+  { title: 'Cambio de griferías', text: 'Reemplazo de grifería de cocina, baño y lavadero, incluidas monocomando.', icon: 'M6 3v6a4 4 0 0 0 4 4h0a4 4 0 0 0 4-4V3 M10 13v8' },
+  { title: 'Sanitarios', text: 'Instalación y arreglo de inodoros, mochilas, bidets y accesorios de baño.', icon: 'M7 4h6a2 2 0 0 1 2 2v3H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M5 11h12v3a6 6 0 0 1-6 6h0a6 6 0 0 1-6-6v-3Z' },
+  { title: 'Cocinas', text: 'Conexión de bachas, lavavajillas y artefactos, con terminación prolija.', icon: 'M4 4h16v8H4z M8 16v4 M16 16v4 M4 20h16' },
+  { title: 'Mantenimiento general', text: 'Plan de mantenimiento periódico para consorcios, locales y comercios.', icon: 'M12 3l2.4 2.4H18v3.6L20.4 12 18 14.4V18h-3.6L12 20.4 9.6 18H6v-3.6L3.6 12 6 9.6V6h3.6z' },
+];
+---
+
+<section class="services" id="servicios">
+  <div class="container">
+    <div class="section-head center reveal">
+      <p class="eyebrow">Qué resolvemos</p>
+      <h2>Un servicio, todos los frentes de la casa</h2>
+      <p>Del caño que gotea a la instalación completa. Si tiene que ver con agua o gas, lo cubrimos.</p>
+    </div>
+
+    <div class="services__grid reveal-stagger reveal">
+      {services.map((s, i) => (
+        <article class="card services__card" style={`--stagger-index: ${i % 5}`}>
+          <span class="services__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d={s.icon} />
+            </svg>
+          </span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services { background: var(--sky-50); }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.4rem;
+  }
+  .services__card {
+    padding: 2rem 1.7rem;
+    position: relative;
+  }
+  .services__icon {
+    display: inline-flex;
+    width: 52px; height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--navy-800), var(--navy-950));
+    color: var(--copper-400);
+    margin-bottom: 1.2rem;
+  }
+  .services__icon svg { width: 26px; height: 26px; }
+  .services__card h3 {
+    font-size: 1.08rem;
+    margin-bottom: 0.5rem;
+  }
+  .services__card p {
+    font-size: 0.9rem;
+    color: var(--ink-500);
+    margin: 0;
+  }
+</style>

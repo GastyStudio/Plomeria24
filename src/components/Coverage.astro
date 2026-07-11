@@ -1,0 +1,97 @@
+---
+// Coverage.astro — zona de cobertura. En vez de un mapa geográfico real
+// (que requeriría datos externos), se usa un gráfico de "radar de cobertura"
+// propio: anillos concéntricos desde la base operativa hacia cada zona.
+const zones = [
+  { area: 'CABA', places: 'Caballito, Palermo, Almagro, Flores, Belgrano y zonas aledañas' },
+  { area: 'Zona Sur GBA', places: 'Lomas de Zamora, Banfield, Avellaneda, Quilmes' },
+  { area: 'Zona Oeste GBA', places: 'Morón, Ituzaingó, San Justo, Ramos Mejía' },
+  { area: 'Zona Norte GBA', places: 'Vicente López, San Isidro, Olivos, Martínez' },
+];
+---
+
+<section class="coverage" id="cobertura">
+  <div class="container coverage__inner">
+    <div class="section-head reveal">
+      <p class="eyebrow">Zona de cobertura</p>
+      <h2>Trabajamos en toda Capital Federal y Gran Buenos Aires</h2>
+      <p>Si estás dentro de estas zonas, coordinamos visita. Ante la duda, escribinos igual: muchas veces también podemos llegar un poco más lejos.</p>
+
+      <ul class="coverage__list">
+        {zones.map((z) => (
+          <li>
+            <strong>{z.area}</strong>
+            <span>{z.places}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="coverage__art reveal" style="--stagger-index: 1">
+      <svg viewBox="0 0 380 380" role="img" aria-label="Gráfico de cobertura por zonas alrededor de la base operativa">
+        <circle cx="190" cy="190" r="170" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+        <circle cx="190" cy="190" r="120" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+        <circle cx="190" cy="190" r="70" fill="var(--blue-100)" stroke="var(--blue-600)" stroke-width="1.5"/>
+
+        <circle cx="190" cy="190" r="9" fill="var(--copper-500)"/>
+        <text x="190" y="215" text-anchor="middle" class="coverage__label coverage__label--main">Base operativa</text>
+
+        <g class="coverage__point">
+          <circle cx="190" cy="60" r="7" fill="var(--navy-800)"/>
+          <text x="190" y="42" text-anchor="middle" class="coverage__label">CABA</text>
+        </g>
+        <g class="coverage__point">
+          <circle cx="308" cy="260" r="7" fill="var(--navy-800)"/>
+          <text x="308" y="286" text-anchor="middle" class="coverage__label">Zona Sur</text>
+        </g>
+        <g class="coverage__point">
+          <circle cx="72" cy="260" r="7" fill="var(--navy-800)"/>
+          <text x="72" y="286" text-anchor="middle" class="coverage__label">Zona Oeste</text>
+        </g>
+        <g class="coverage__point">
+          <circle cx="190" cy="330" r="7" fill="var(--navy-800)"/>
+          <text x="190" y="352" text-anchor="middle" class="coverage__label">Zona Norte</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .coverage { background: var(--white); }
+  .coverage__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .coverage__list {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.1rem;
+  }
+  .coverage__list li {
+    display: flex;
+    flex-direction: column;
+    padding: 0.9rem 1.1rem;
+    background: var(--sky-50);
+    border-left: 3px solid var(--copper-500);
+    border-radius: 0 10px 10px 0;
+  }
+  .coverage__list strong { color: var(--navy-950); font-size: 0.98rem; }
+  .coverage__list span { color: var(--ink-500); font-size: 0.86rem; margin-top: 0.15rem; }
+
+  .coverage__art svg { width: 100%; max-width: 380px; margin-inline: auto; display: block; }
+  .coverage__label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    fill: var(--ink-700);
+  }
+  .coverage__label--main { fill: var(--navy-950); font-size: 12px; }
+
+  @media (max-width: 900px) {
+    .coverage__inner { grid-template-columns: 1fr; }
+  }
+</style>
