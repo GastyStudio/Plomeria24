@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fernandoplomeria.com.ar/sitemap.xml
