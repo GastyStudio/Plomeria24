@@ -18,16 +18,3 @@ Desarrollada en **Astro** para garantizar una carga instantánea (lo que reduce 
 * 🗺️ **SEO Local Integrado:** Incluye datos estructurados nativos de Schema.org (`schema.org/Plumber`) en el `<head>` para posicionar el negocio en CABA y GBA.
 * 🔋 **Cero Dependencias Pesadas:** Iconos en SVG inline, sin librerías externas de fuentes o iconos que ralenticen la carga.
 
----
-
-## 🛠️ Cómo Correr el Proyecto Localmente
-
-### Requisitos Previos
-* Node.js 18 o superior instalado.
-
-### Pasos
-1. **Clonar el repositorio e instalar dependencias:**
-   ```bash
-   git clone [https://github.com/tu-usuario/fernando-plomeria.git](https://github.com/tu-usuario/fernando-plomeria.git)
-   cd fernando-plomeria
-   npm install
